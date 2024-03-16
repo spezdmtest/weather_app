@@ -1,6 +1,8 @@
 const link =
   "http://api.weatherstack.com/current?access_key=fc3a599323c964c600f1a162cc442b4a";
 
+const root = document.getElementById("root");
+
 let store = {
   city: "Romny",
   feelslike: 0,
@@ -51,5 +53,12 @@ const fetchData = async () => {
     windSpeed,
     description: description[0],
   };
+
+  renderComponent();
 };
+
+const renderComponent = () => {
+  root.innerHTML = `${store.temperature}°`;
+};
+
 fetchData();
