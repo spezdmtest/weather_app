@@ -21,8 +21,7 @@ let store = {
 const fetchData = async () => {
   const result = await fetch(`${link}&query=${store.city}`);
   const data = await result.json();
-  console.log(data);
-
+  
   const {
     current: {
       feelslike,
@@ -57,8 +56,33 @@ const fetchData = async () => {
   renderComponent();
 };
 
+const markup = () => {
+  return `
+    <div class="container">
+      <div class="top">
+        <div class="city">
+          <div class="city-subtitle">Weather Today in</div>
+          <div class="city-title" id="city">
+            <span></span>
+          </div>
+        </div>
+        <div class="city-info">
+          <div class="top-left">
+            <img class="icon" src="./img/" alt="" />
+            <div class="description"></div>
+          </div>
+          <div class="top-right">
+            <div class="city-info__subtitle">as of</div>
+            <div class="city-info__title">°</div>
+          </div>
+        </div>
+      </div>
+      <div id="properties"></div>
+    </div>`;
+};
+
 const renderComponent = () => {
-  root.innerHTML = `${store.temperature}°`;
+  root.innerHTML = markup();
 };
 
 fetchData();
