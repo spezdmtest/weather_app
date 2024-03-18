@@ -80,9 +80,12 @@ const getImage = (description) => {
 };
 
 const markup = () => {
-  const { city, description, observationTime, temperature } = store;
+  const { city, description, observationTime, temperature, isDay } = store;
+  
+  const containerClass = isDay === "yes" ? "is-day" : "";
+  
   return `
-    <div class="container">
+    <div class="container ${containerClass}">
       <div class="top">
         <div class="city">
           <div class="city-subtitle">Weather Today in</div>
