@@ -12,13 +12,13 @@ let store = {
   isDay: "yes",
   description: "",
   properties: {
-    cloudcover: 0,
-    humidity: 0,  
-    windSpeed: 0,
-    pressure: 0,
-    visibility: 0,
-    uvIndex: 0,
-  }
+    cloudcover: {},
+    humidity: {},
+    windSpeed: {},
+    pressure: {},
+    visibility: {},
+    uvIndex: {},
+  },
 };
 
 const fetchData = async () => {
@@ -45,17 +45,42 @@ const fetchData = async () => {
   store = {
     ...store,
     isDay,
-    pressure,
-    uvIndex,
     feelslike,
-    cloudcover,
     temperature,
-    humidity,
     observationTime,
-    visibility,
-    windSpeed,
     description: description[0],
-    
+    properties: {
+      cloudcover: {
+        title: "cloudcover",
+        value: `${cloudcover} %`,
+        icon: "cloud.png",
+      },
+      humidity: {
+        title: "humidity",
+        value: `${humidity} %`,
+        icon: "humidity.png",
+      },
+      windSpeed: {
+        title: "windSpeed",
+        value: `${windSpeed} km/h`,
+        icon: "wind.png",
+      },
+      pressure: {
+        title: "pressure",
+        value: `${pressure} %`,
+        icon: "gauge.png",
+      },
+      uvIndex: {
+        title: "uvIndex",
+        value: `${uvIndex} / 100`,
+        icon: "uv-index.png",
+      },
+      visibility: {
+        title: "visibility",
+        value: `${visibility} %`,
+        icon: "visibility.png",
+      },
+    },
   };
 
   renderComponent();
@@ -79,11 +104,31 @@ const getImage = (description) => {
   }
 };
 
+const renderProperty = (properties) => {
+  return Object.values(properties)
+    .map(({ title, value, icon }) => {
+      // const { title, value, icon } = data;
+      return `
+    <div class="property">
+      <div class="property-icon">
+        <img src="./img/icons/${icon}" alt="">
+      </div>
+      <div class="property-info">
+        <div class="property-info__value">${value}</div>
+        <div class="property-info__description">${title}</div>
+      </div>
+    </div>
+    `;
+  })
+    .join("");
+};
+
 const markup = () => {
-  const { city, description, observationTime, temperature, isDay } = store;
-  
+  const { city, description, observationTime, temperature, isDay, properties } =
+    store;
+
   const containerClass = isDay === "yes" ? "is-day" : "";
-  
+
   return `
     <div class="container ${containerClass}">
       <div class="top">
@@ -104,8 +149,9 @@ const markup = () => {
           </div>
         </div>
       </div>
-      <div id="properties"></div>
-    </div>`;
+      <div id="properties">${renderProperty(properties)}</div>
+    </div>
+    `;
 };
 
 const renderComponent = () => {
