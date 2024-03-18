@@ -1,5 +1,5 @@
 const link =
-  "http://api.weatherstack.com/current?access_key=fc3a599323c964c600f1a162cc442b4a";
+  "http://api.weatherstack.com/current?access_key=951981ebc5a411b6a982668563334cf4";
 
 const root = document.getElementById("root");
 
@@ -21,7 +21,8 @@ let store = {
 const fetchData = async () => {
   const result = await fetch(`${link}&query=${store.city}`);
   const data = await result.json();
-  
+  console.log(data);
+
   const {
     current: {
       feelslike,
@@ -57,23 +58,24 @@ const fetchData = async () => {
 };
 
 const markup = () => {
+  const { city, description, observationTime, temperature } = store;
   return `
     <div class="container">
       <div class="top">
         <div class="city">
           <div class="city-subtitle">Weather Today in</div>
           <div class="city-title" id="city">
-            <span></span>
+            <span>${city}</span>
           </div>
         </div>
         <div class="city-info">
           <div class="top-left">
             <img class="icon" src="./img/" alt="" />
-            <div class="description"></div>
+            <div class="description">${description}</div>
           </div>
           <div class="top-right">
-            <div class="city-info__subtitle">as of</div>
-            <div class="city-info__title">°</div>
+            <div class="city-info__subtitle">as of ${observationTime}</div>
+            <div class="city-info__title">${temperature}°</div>
           </div>
         </div>
       </div>
