@@ -57,6 +57,24 @@ const fetchData = async () => {
   renderComponent();
 };
 
+const getImage = (description) => {
+  const value = description.toLowerCase();
+  switch (value) {
+    case "patchy rain nearby":
+      return "cloud.png";
+    case "cloud":
+      return "cloud.png";
+    case "fog":
+      return "fog.png";
+    case "sunny":
+      return "sunny.png";
+    case "partly cloudy":
+      return "partly.png";
+    default:
+      return "the.png";
+  }
+};
+
 const markup = () => {
   const { city, description, observationTime, temperature } = store;
   return `
@@ -70,7 +88,7 @@ const markup = () => {
         </div>
         <div class="city-info">
           <div class="top-left">
-            <img class="icon" src="./img/" alt="" />
+            <img class="icon" src="./img/${getImage(description)}" alt="" />
             <div class="description">${description}</div>
           </div>
           <div class="top-right">
