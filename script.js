@@ -8,14 +8,17 @@ let store = {
   feelslike: 0,
   cloudcover: 0,
   temperature: 0,
-  humidity: 0,
   observationTime: "00:00 AM",
-  pressure: 0,
-  uvIndex: 0,
-  visibility: 0,
   isDay: "yes",
   description: "",
-  windSpeed: 0,
+  properties: {
+    cloudcover: 0,
+    humidity: 0,  
+    windSpeed: 0,
+    pressure: 0,
+    visibility: 0,
+    uvIndex: 0,
+  }
 };
 
 const fetchData = async () => {
@@ -52,6 +55,7 @@ const fetchData = async () => {
     visibility,
     windSpeed,
     description: description[0],
+    
   };
 
   renderComponent();
