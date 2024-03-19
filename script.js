@@ -2,6 +2,7 @@ const link =
   "http://api.weatherstack.com/current?access_key=951981ebc5a411b6a982668563334cf4";
 
 const root = document.getElementById("root");
+const popup = document.getElementById("popup");
 
 let store = {
   city: "Romny",
@@ -154,8 +155,15 @@ const markup = () => {
     `;
 };
 
+const toggleClass = () => {
+  popup.classList.toggle("active");
+}
+
 const renderComponent = () => {
   root.innerHTML = markup();
+ 
+  const city = document.getElementById("city");
+  city.addEventListener("click", toggleClass); 
 };
 
 fetchData();
