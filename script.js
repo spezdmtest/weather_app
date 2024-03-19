@@ -49,7 +49,7 @@ const fetchData = async () => {
     feelslike,
     temperature,
     observationTime,
-    description: description[0],
+    description: description[0].trim(),
     properties: {
       cloudcover: {
         title: "cloudcover",
@@ -120,7 +120,7 @@ const renderProperty = (properties) => {
       </div>
     </div>
     `;
-  })
+    })
     .join("");
 };
 
@@ -157,13 +157,13 @@ const markup = () => {
 
 const toggleClass = () => {
   popup.classList.toggle("active");
-}
+};
 
 const renderComponent = () => {
   root.innerHTML = markup();
- 
+
   const city = document.getElementById("city");
-  city.addEventListener("click", toggleClass); 
+  city.addEventListener("click", toggleClass);
 };
 
 fetchData();
