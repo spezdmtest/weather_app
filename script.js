@@ -26,10 +26,10 @@ let store = {
 
 const fetchData = async () => {
   try {
-    const result = await fetch(`${link}&query=${store.city}`);
+    const query = localStorage.getItem("query") || store.city;
+    const result = await fetch(`${link}&query=${query}`);
     const data = await result.json();
-    console.log(data);
-
+    
     const {
       current: {
         feelslike,
@@ -44,12 +44,14 @@ const fetchData = async () => {
         weather_descriptions: description,
         wind_speed: windSpeed,
       },
+      location: { name },
     } = data;
 
     store = {
       ...store,
       isDay,
       feelslike,
+      city: name,
       temperature,
       observationTime,
       description: description[0].trim(),
@@ -188,9 +190,13 @@ const handleInput = (e) => {
   };
 };
 
- const handleSubmit = (e) => {
+const handleSubmit = (e) => {
   e.preventDefault();
+  const value = store.city;
+
   if (!store.city) return null;
+
+  localStorage.setItem("query", value);
   fetchData();
   togglePopupClass();
 };
