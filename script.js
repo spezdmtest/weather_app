@@ -96,6 +96,8 @@ const getImage = (description) => {
       return "cloud.png";
     case "cloud":
       return "cloud.png";
+    case "overcast":
+      return "cloud.png";  
     case "fog":
       return "fog.png";
     case "sunny":
@@ -157,7 +159,7 @@ const markup = () => {
     `;
 };
 
-const toggleClass = () => {
+const togglePopupClass = () => {
   popup.classList.toggle("active");
 };
 
@@ -165,7 +167,7 @@ const renderComponent = () => {
   root.innerHTML = markup();
 
   const city = document.getElementById("city");
-  city.addEventListener("click", toggleClass);
+  city.addEventListener("click", togglePopupClass);
 };
 
 const handleInput = (e) => {
@@ -177,7 +179,8 @@ const handleInput = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  console.log(store.city);
+  fetchData();
+  togglePopupClass();
 }
 
 form.addEventListener("submit", handleSubmit);
