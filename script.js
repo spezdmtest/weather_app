@@ -25,68 +25,71 @@ let store = {
 };
 
 const fetchData = async () => {
-  const result = await fetch(`${link}&query=${store.city}`);
-  const data = await result.json();
-  console.log(data);
+  try {
+    const result = await fetch(`${link}&query=${store.city}`);
+    const data = await result.json();
+    console.log(data);
 
-  const {
-    current: {
+    const {
+      current: {
+        feelslike,
+        cloudcover,
+        temperature,
+        humidity,
+        observation_time: observationTime,
+        pressure,
+        uv_index: uvIndex,
+        visibility,
+        is_day: isDay,
+        weather_descriptions: description,
+        wind_speed: windSpeed,
+      },
+    } = data;
+
+    store = {
+      ...store,
+      isDay,
       feelslike,
-      cloudcover,
       temperature,
-      humidity,
-      observation_time: observationTime,
-      pressure,
-      uv_index: uvIndex,
-      visibility,
-      is_day: isDay,
-      weather_descriptions: description,
-      wind_speed: windSpeed,
-    },
-  } = data;
-
-  store = {
-    ...store,
-    isDay,
-    feelslike,
-    temperature,
-    observationTime,
-    description: description[0].trim(),
-    properties: {
-      cloudcover: {
-        title: "cloudcover",
-        value: `${cloudcover} %`,
-        icon: "cloud.png",
+      observationTime,
+      description: description[0].trim(),
+      properties: {
+        cloudcover: {
+          title: "cloudcover",
+          value: `${cloudcover} %`,
+          icon: "cloud.png",
+        },
+        humidity: {
+          title: "humidity",
+          value: `${humidity} %`,
+          icon: "humidity.png",
+        },
+        windSpeed: {
+          title: "windSpeed",
+          value: `${windSpeed} km/h`,
+          icon: "wind.png",
+        },
+        pressure: {
+          title: "pressure",
+          value: `${pressure} %`,
+          icon: "gauge.png",
+        },
+        uvIndex: {
+          title: "uvIndex",
+          value: `${uvIndex} / 100`,
+          icon: "uv-index.png",
+        },
+        visibility: {
+          title: "visibility",
+          value: `${visibility} %`,
+          icon: "visibility.png",
+        },
       },
-      humidity: {
-        title: "humidity",
-        value: `${humidity} %`,
-        icon: "humidity.png",
-      },
-      windSpeed: {
-        title: "windSpeed",
-        value: `${windSpeed} km/h`,
-        icon: "wind.png",
-      },
-      pressure: {
-        title: "pressure",
-        value: `${pressure} %`,
-        icon: "gauge.png",
-      },
-      uvIndex: {
-        title: "uvIndex",
-        value: `${uvIndex} / 100`,
-        icon: "uv-index.png",
-      },
-      visibility: {
-        title: "visibility",
-        value: `${visibility} %`,
-        icon: "visibility.png",
-      },
-    },
-  };
-
-  renderComponent();
+    };
+    renderComponent();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const getImage = (description) => {
@@ -97,7 +100,7 @@ const getImage = (description) => {
     case "cloud":
       return "cloud.png";
     case "overcast":
-      return "cloud.png";  
+      return "cloud.png";
     case "fog":
       return "fog.png";
     case "sunny":
@@ -181,7 +184,7 @@ const handleSubmit = (e) => {
   e.preventDefault();
   fetchData();
   togglePopupClass();
-}
+};
 
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
