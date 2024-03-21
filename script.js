@@ -1,8 +1,10 @@
 const link =
-  "http://api.weatherstack.com/current?access_key=951981ebc5a411b6a982668563334cf4";
+  "http://api.weatherstack.com/current?access_key=7b048faeac1477bce5ee8a11ba24330e";
 
 const root = document.getElementById("root");
 const popup = document.getElementById("popup");
+const textInput = document.getElementById("text-input");
+const form = document.getElementById("form");
 
 let store = {
   city: "Romny",
@@ -165,5 +167,20 @@ const renderComponent = () => {
   const city = document.getElementById("city");
   city.addEventListener("click", toggleClass);
 };
+
+const handleInput = (e) => {
+  store = {
+    ...store,
+    city: e.target.value,
+  };
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(store.city);
+}
+
+form.addEventListener("submit", handleSubmit);
+textInput.addEventListener("input", handleInput);
 
 fetchData();
