@@ -168,7 +168,7 @@ const togglePopupClass = () => {
 };
 
 const handleClose = () => {
-  popup.classList.remove("active");
+  popup.classList.toggle("active");
 };
 
 const renderComponent = () => {
@@ -190,6 +190,7 @@ const handleInput = (e) => {
 
  const handleSubmit = (e) => {
   e.preventDefault();
+  if (!store.city) return null;
   fetchData();
   togglePopupClass();
 };
