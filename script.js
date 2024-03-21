@@ -174,10 +174,10 @@ const handleClose = () => {
 const renderComponent = () => {
   root.innerHTML = markup();
 
-const city = document.getElementById("city");
+  const city = document.getElementById("city");
   city.addEventListener("click", togglePopupClass);
 
-const close = document.getElementById("close");
+  const close = document.getElementById("close");
   close.addEventListener("click", handleClose);
 };
 
@@ -188,7 +188,7 @@ const handleInput = (e) => {
   };
 };
 
-const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
   e.preventDefault();
   fetchData();
   togglePopupClass();
