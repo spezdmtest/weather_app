@@ -86,6 +86,7 @@ const fetchData = async () => {
         },
       },
     };
+
     renderComponent();
   } catch (err) {
     console.log(err);
@@ -166,11 +167,18 @@ const togglePopupClass = () => {
   popup.classList.toggle("active");
 };
 
+const handleClose = () => {
+  popup.classList.remove("active");
+};
+
 const renderComponent = () => {
   root.innerHTML = markup();
 
-  const city = document.getElementById("city");
+const city = document.getElementById("city");
   city.addEventListener("click", togglePopupClass);
+
+const close = document.getElementById("close");
+  close.addEventListener("click", handleClose);
 };
 
 const handleInput = (e) => {
