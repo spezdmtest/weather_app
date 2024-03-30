@@ -4,6 +4,8 @@ Description:
 
 Designed and developed a microservices-based web application from scratch using pure JavaScript (ES5 and ES6) to retrieve weather information from the free API provided by Weatherstack (https://weatherstack.com/). Additionally, incorporated various features and techniques such as destructuring in JavaScript, and explored data storage mechanisms using localStorage.
 
+This project showcased expertise in JavaScript development, API integration, microservices architecture, and frontend web development, demonstrating the ability to build robust and scalable web applications using modern technologies and methodologies.
+
 Key Features and Technologies:
 1. API Integration: Leveraged the Weatherstack API to fetch real-time weather data including temperature, humidity, wind speed, and weather conditions for specified locations.
 2. Microservices Architecture: Built the application with a modular microservices architecture, separating different functionalities into smaller, independent services for improved scalability, maintainability, and flexibility.
